@@ -1,5 +1,8 @@
 {
-  "rules": {
-    "no-empty": true
-  }
+    "rules": {
+        "indent": [true, "tabs", 4],
+        "object-literal-sort-keys": false,
+        "experimentalDecorators": false,
+        "no-empty": false
+    }
 }

@@ -1,3 +1,10 @@
 {{#each properties}}
-public {{pascalcase name}}:{{type}};
+@bindable()
+public o{{capitalize name}}:{{{type}}};
+private o{{capitalize name}}Changed(newValue, oldValue){
+if (!this.flatpickrInstance) {
+return;
+}
+this.flatpickrInstance.set("{{name}}",this.o{{capitalize name}});
+}
 {{/each}}
