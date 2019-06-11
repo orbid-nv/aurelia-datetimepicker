@@ -1,6 +1,28 @@
-export class OrDateTimePicker {
-  constructor() {
-    //todo
+import { autoinject, bindable, bindingMode } from "aurelia-framework";
+import * as Flatpickr from "flatpickr";
+import { Instance } from "flatpickr/dist/types/instance";
+
+@autoinject()
+export class OrDatetimepicker {
+  public flatpickr: any = (<any>Flatpickr).default || Flatpickr;
+  public flatpickrInstance: Instance;
+  public flatpickerElement: HTMLElement;
+  @bindable config: any = {};
+  public _config: any;
+  @bindable
+  placeholder: any;
+
+  constructor(public element: Element) {}
+
+  // private attached() {
+  //   this.flatpickrElement = new this.flatpickr(
+  //     this.element.querySelector(".aurelia-flatpickr"),
+  //     {}
+  //   );
+  // }
+  private attached() {
+    this.flatpickrInstance = this.flatpickr(this.flatpickerElement, {});
+    this.flatpickrInstance.setDate(new Date("05/05/2018"));
   }
 
   //--- GENERATED CODE ---

@@ -1,0 +1,12 @@
+<template>
+  <require from="flatpickr/flatpickr.min.css"></require>
+  <!-- <require from="./or-datetimepicker.css"></require> -->
+  <slot>
+    <input
+      class="aurelia-flatpickr"
+      type="text"
+      placeholder.bind="placeholder"
+      ref="flatpickerElement"
+    />
+  </slot>
+</template>
