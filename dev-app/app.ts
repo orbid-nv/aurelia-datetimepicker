@@ -2,7 +2,7 @@ export class App {
 	public message: string = "from Aurelia!";
 	public dateFormat: string = "m-d-Y";
 	public maxDate: Date = new Date();
-	public value: Date = new Date();
+	public value: Date[] = [new Date(), new Date("2019-05-01")];
 	public mode: string = "single";
 	clicked() {
 		// eslint-disable-next-line no-alert

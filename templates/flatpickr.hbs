@@ -8,3 +8,10 @@ return;
 this.flatpickrInstance.set("{{name}}",this.o{{capitalize name}});
 }
 {{/each}}
+private initialiseProperties(){
+{{#each properties}}
+if(this.o{{capitalize name}}){
+this.flatpickrInstance.set("{{name}}",this.o{{capitalize name}});
+}
+{{/each}}
+}

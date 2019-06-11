@@ -1,4 +1,11 @@
-import { autoinject, bindable, bindingMode } from "aurelia-framework";
+import {
+  autoinject,
+  bindable,
+  bindingMode,
+  BindingEngine,
+  ICollectionObserverSplice,
+  Disposable
+} from "aurelia-framework";
 import * as Flatpickr from "flatpickr";
 import { Instance } from "flatpickr/dist/types/instance";
 
@@ -11,6 +18,7 @@ export class OrDatetimepicker {
   public _config: any;
   @bindable
   public placeholder: any;
+  public selectedDatesSubscription: Disposable;
   private attached() {
 	this.flatpickrInstance = this.flatpickr(this.flatpickerElement, {});
 	// this.flatpickrInstance.setDate(new Date("05/05/2018"));
@@ -19,32 +27,62 @@ export class OrDatetimepicker {
 		switch (instance.config.mode) {
 			case "multiple":
 			case "range":
-			this.oValue = selectedDates;
+			this.oValues = selectedDates;
 			break;
 			case "single":
 			case "time": {
 			if (selectedDates != null && selectedDates.length > 0)
-				this.oValue = selectedDates;
+				this.oValue = selectedDates[0];
 			else this.oValue = null;
 			break;
 			}
 		}
 		}
 	);
+	this.initialiseProperties();
+	if (this.oValue) {
+		this.flatpickrInstance.setDate(this.oValue);
+	} else if (this.oValues) {
+		this.flatpickrInstance.setDate(this.oValues);
+	}
+  }
+  constructor(private bindingEngine: BindingEngine) {}
+  private collectionChanged(
+	splices: Array<ICollectionObserverSplice<string | Date>>
+  ) {
+	this.flatpickrInstance.setDate(this.oValues);
   }
   private detached() {
 	this.flatpickrInstance.config.onChange.length = 0;
+	if (this.selectedDatesSubscription) {
+		this.selectedDatesSubscription.dispose();
+	}
   }
   @bindable({ defaultBindingMode: bindingMode.twoWay })
-  public oValue: Date | Date[];
+  public oValue: Date;
 
   private oValueChanged(newValue, oldValue) {
 	if (!this.flatpickrInstance) {
 		return;
 	}
+
 	this.flatpickrInstance.setDate(this.oValue);
   }
+  @bindable({ defaultBindingMode: bindingMode.twoWay })
+  public oValues: Date[];
 
+  private oValuesChanged(newValue, oldValue) {
+	if (!this.flatpickrInstance) {
+		return;
+	}
+	if (this.selectedDatesSubscription) {
+		this.selectedDatesSubscription.dispose();
+	}
+	this.selectedDatesSubscription = this.bindingEngine
+		.collectionObserver(this.oValues)
+		.subscribe(this.collectionChanged.bind(this));
+	this.flatpickrInstance.setDate(this.oValues);
+  }
   //--- GENERATED CODE ---
   @bindable()
   public oAllowInput: boolean;
@@ -344,6 +382,122 @@ export class OrDatetimepicker {
 		return;
 	}
 	this.flatpickrInstance.set("wrap", this.oWrap);
+  }
+  private initialiseProperties() {
+	if (this.oAllowInput) {
+		this.flatpickrInstance.set("allowInput", this.oAllowInput);
+	}
+	if (this.oAltFormat) {
+		this.flatpickrInstance.set("altFormat", this.oAltFormat);
+	}
+	if (this.oAltInput) {
+		this.flatpickrInstance.set("altInput", this.oAltInput);
+	}
+	if (this.oAltInputClass) {
+		this.flatpickrInstance.set("altInputClass", this.oAltInputClass);
+	}
+	if (this.oAnimate) {
+		this.flatpickrInstance.set("animate", this.oAnimate);
+	}
+	if (this.oAriaDateFormat) {
+		this.flatpickrInstance.set("ariaDateFormat", this.oAriaDateFormat);
+	}
+	if (this.oClickOpens) {
+		this.flatpickrInstance.set("clickOpens", this.oClickOpens);
+	}
+	if (this.oCloseOnSelect) {
+		this.flatpickrInstance.set("closeOnSelect", this.oCloseOnSelect);
+	}
+	if (this.oConjunction) {
+		this.flatpickrInstance.set("conjunction", this.oConjunction);
+	}
+	if (this.oDateFormat) {
+		this.flatpickrInstance.set("dateFormat", this.oDateFormat);
+	}
+	if (this.oDefaultDate) {
+		this.flatpickrInstance.set("defaultDate", this.oDefaultDate);
+	}
+	if (this.oDefaultHour) {
+		this.flatpickrInstance.set("defaultHour", this.oDefaultHour);
+	}
+	if (this.oDefaultMinute) {
+		this.flatpickrInstance.set("defaultMinute", this.oDefaultMinute);
+	}
+	if (this.oDefaultSeconds) {
+		this.flatpickrInstance.set("defaultSeconds", this.oDefaultSeconds);
+	}
+	if (this.oDisableMobile) {
+		this.flatpickrInstance.set("disableMobile", this.oDisableMobile);
+	}
+	if (this.oEnableSeconds) {
+		this.flatpickrInstance.set("enableSeconds", this.oEnableSeconds);
+	}
+	if (this.oEnableTime) {
+		this.flatpickrInstance.set("enableTime", this.oEnableTime);
+	}
+	if (this.oHourIncrement) {
+		this.flatpickrInstance.set("hourIncrement", this.oHourIncrement);
+	}
+	if (this.oInline) {
+		this.flatpickrInstance.set("inline", this.oInline);
+	}
+	if (this.oLocale) {
+		this.flatpickrInstance.set("locale", this.oLocale);
+	}
+	if (this.oMaxDate) {
+		this.flatpickrInstance.set("maxDate", this.oMaxDate);
+	}
+	if (this.oMaxTime) {
+		this.flatpickrInstance.set("maxTime", this.oMaxTime);
+	}
+	if (this.oMinDate) {
+		this.flatpickrInstance.set("minDate", this.oMinDate);
+	}
+	if (this.oMinTime) {
+		this.flatpickrInstance.set("minTime", this.oMinTime);
+	}
+	if (this.oMinuteIncrement) {
+		this.flatpickrInstance.set("minuteIncrement", this.oMinuteIncrement);
+	}
+	if (this.oMode) {
+		this.flatpickrInstance.set("mode", this.oMode);
+	}
+	if (this.oNextArrow) {
+		this.flatpickrInstance.set("nextArrow", this.oNextArrow);
+	}
+	if (this.oNoCalendar) {
+		this.flatpickrInstance.set("noCalendar", this.oNoCalendar);
+	}
+	if (this.oNow) {
+		this.flatpickrInstance.set("now", this.oNow);
+	}
+	if (this.oPosition) {
+		this.flatpickrInstance.set("position", this.oPosition);
+	}
+	if (this.oPrevArrow) {
+		this.flatpickrInstance.set("prevArrow", this.oPrevArrow);
+	}
+	if (this.oShorthandCurrentMonth) {
+		this.flatpickrInstance.set(
+		"shorthandCurrentMonth",
+		this.oShorthandCurrentMonth
+		);
+	}
+	if (this.oShowMonths) {
+		this.flatpickrInstance.set("showMonths", this.oShowMonths);
+	}
+	if (this.oStatic) {
+		this.flatpickrInstance.set("static", this.oStatic);
+	}
+	if (this.oTime_24hr) {
+		this.flatpickrInstance.set("time_24hr", this.oTime_24hr);
+	}
+	if (this.oWeekNumbers) {
+		this.flatpickrInstance.set("weekNumbers", this.oWeekNumbers);
+	}
+	if (this.oWrap) {
+		this.flatpickrInstance.set("wrap", this.oWrap);
+	}
   }
   //--- END GENERATED CODE ---
 }
