@@ -26,38 +26,38 @@ export class OrDatetimepicker {
   }
 
   //--- GENERATED CODE ---
-  public allowInput: boolean;
-  public altFormat: string;
-  public altInput: boolean;
-  public altInputClass: string;
-  public animate: boolean;
-  public ariaDateFormat: string;
-  public clickOpens: boolean;
-  public closeOnSelect: boolean;
-  public conjunction: string;
-  public dateFormat: string;
-  public defaultHour: number;
-  public defaultMinute: number;
-  public defaultSeconds: number;
-  public disableMobile: boolean;
-  public enableSeconds: boolean;
-  public enableTime: boolean;
-  public hourIncrement: number;
-  public inline: boolean;
-  public maxDate: Date;
-  public maxTime: Date;
-  public minDate: Date;
-  public minTime: Date;
-  public minuteIncrement: number;
-  public nextArrow: string;
-  public noCalendar: boolean;
-  public now: Date;
-  public prevArrow: string;
-  public shorthandCurrentMonth: boolean;
-  public showMonths: number;
-  public static: boolean;
-  public time_24hr: boolean;
-  public weekNumbers: boolean;
-  public wrap: boolean;
-  //--- END GENERATED CODE ---
+public Allowinput:boolean;
+public Altformat:string;
+public Altinput:boolean;
+public Altinputclass:string;
+public Animate:boolean;
+public Ariadateformat:string;
+public Clickopens:boolean;
+public Closeonselect:boolean;
+public Conjunction:string;
+public Dateformat:string;
+public Defaulthour:number;
+public Defaultminute:number;
+public Defaultseconds:number;
+public Disablemobile:boolean;
+public Enableseconds:boolean;
+public Enabletime:boolean;
+public Hourincrement:number;
+public Inline:boolean;
+public Maxdate:Date;
+public Maxtime:Date;
+public Mindate:Date;
+public Mintime:Date;
+public Minuteincrement:number;
+public Nextarrow:string;
+public Nocalendar:boolean;
+public Now:Date;
+public Prevarrow:string;
+public Shorthandcurrentmonth:boolean;
+public Showmonths:number;
+public Static:boolean;
+public Time24hr:boolean;
+public Weeknumbers:boolean;
+public Wrap:boolean;
+//--- END GENERATED CODE ---
 }

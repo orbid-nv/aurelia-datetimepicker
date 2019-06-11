@@ -3,6 +3,7 @@ import * as replace from "gulp-replace";
 import * as typedoc from "gulp-typedoc";
 import * as fs from "fs";
 import * as hbsAll from "gulp-handlebars-all";
+import * as hbHelpers from "handlebars-helpers";
 
 function readTs() {
   //instance.d.ts is de high-level ts file
@@ -57,11 +58,7 @@ function extractOptions(jsObj, json) {
 
         partials: ["partials/*.hbs"],
 
-        helpers: {
-          capitals: function(str) {
-            return str.toUpperCase();
-          },
-        },
+        helpers: hbHelpers(),
       }),
     )
     .on("data", function(file) {
