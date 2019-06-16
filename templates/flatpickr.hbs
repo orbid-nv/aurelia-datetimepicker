@@ -8,10 +8,52 @@ return;
 this.flatpickrInstance.set("{{name}}",this.o{{capitalize name}});
 }
 {{/each}}
-private initialiseProperties(){
-{{#each properties}}
-if(this.o{{capitalize name}}){
-this.flatpickrInstance.set("{{name}}",this.o{{capitalize name}});
+{{#each arrays}}
+@bindable()
+public o{{capitalize name}}:{{{type}}};
+public o{{capitalize name}}Subscription: Disposable;
+private o{{capitalize name}}Changed(newValue, oldValue) {
+if (!this.flatpickrInstance) {
+return;
 }
-{{/each}}
+if (this.o{{capitalize name}}Subscription) {
+this.o{{capitalize name}}Subscription.dispose();
 }
+if (this.o{{capitalize name}} instanceof Array) {
+this.o{{capitalize name}}Subscription = this.bindingEngine
+.collectionObserver(this.o{{capitalize name}})
+.subscribe(this.o{{capitalize name}}CollectionChanged.bind(this));
+}
+
+this.flatpickrInstance.set("{{name}}", this.o{{capitalize name}});
+}
+private o{{capitalize name}}CollectionChanged(
+splices: Array<ICollectionObserverSplice<any>>
+	) {
+	this.flatpickrInstance.set("{{name}}", this.o{{capitalize name}});
+	}
+
+	{{/each}}
+	private initialiseProperties(){
+	{{#each properties}}
+	if(this.o{{capitalize name}}){
+	this.flatpickrInstance.set("{{name}}",this.o{{capitalize name}});
+	}
+	{{/each}}
+	{{#each arrays}}
+	if(this.o{{capitalize name}}){
+	this.flatpickrInstance.set("{{name}}",this.o{{capitalize name}});
+	if (this.o{{capitalize name}} instanceof Array) {
+	this.o{{capitalize name}}Subscription = this.bindingEngine
+	.collectionObserver(this.o{{capitalize name}})
+	.subscribe(this.o{{capitalize name}}CollectionChanged.bind(this));
+	}
+	}
+	{{/each}}
+
+	}
+	private disposeProperties(){
+	{{#each arrays}}
+	this.o{{capitalize name}}Subscription.dispose();
+	{{/each}}
+	}

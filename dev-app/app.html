@@ -39,20 +39,31 @@
             primaryClick"&gt;&lt;/button&gt;</code
         >
     </p>
-    <button click.trigger="clicked() & primaryClick">
-        Only triggers on a primary button click or a touch on mobile device
-    </button>
+    <button click.trigger="clicked() & primaryClick">click</button>
+    ${disable}
+    <!--  Only triggers on a primary button click or a touch on mobile device
     <input type="text" value.bind="dateFormat" />
-    <input type="text" value.one-way="value" />
-    <or-datetimepicker
-        placeholder="test"
-        o-date-format.bind="dateFormat"
-        o-max-date.bind="maxDate"
-        o-values.bind="value"
-        o-mode.bind="mode"
-    ></or-datetimepicker>
+	<input type="text" value.one-way="value" /> -->
+    <!-- <div>
+        <or-datetimepicker
+            placeholder="test"
+            o-date-format.bind="dateFormat"
+            o-max-date.bind="maxDate"
+            o-values.bind="value"
+            o-mode.bind="mode"
+        ></or-datetimepicker>
+    </div> -->
+    <div>
+        <or-datetimepicker
+            placeholder="test"
+            o-date-format.bind="dateFormat"
+            o-values.bind="value"
+            o-mode="multiple"
+            o-disable.bind="disable"
+        ></or-datetimepicker>
+    </div>
 
-    ${value}
+    <!-- ${value}
     <template if.bind="value.length">
         <div repeat.for="date of value">
             <or-datetimepicker
@@ -62,5 +73,5 @@
                 o-value.bind="date"
             ></or-datetimepicker>
         </div>
-    </template>
+    </template> -->
 </template>

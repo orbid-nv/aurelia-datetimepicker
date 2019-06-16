@@ -59,11 +59,16 @@ function extractOptions(jsObj, json) {
 				!x.name.startsWith("_")
 		)
 		.map(x => new FlProperty({ name: x.name, type: convertType(x.type) }));
-
+	var arrays = json.children[0].children[1].children
+		.filter(x => x.type.type === "array" && !x.name.startsWith("_"))
+		.map(x => new FlProperty({ name: x.name, type: "any[]" }));
 	gulp.src("./templates/flatpickr.hbs")
 		.pipe(
 			hbsAll("html", {
-				context: new FlConfig({ properties: properties }),
+				context: new FlConfig({
+					properties: properties,
+					arrays: arrays
+				}),
 
 				partials: ["partials/*.hbs"],
 
@@ -124,6 +129,7 @@ function extractOptions(jsObj, json) {
 
 class FlConfig {
 	public properties: FlProperty[];
+	public arrays: FlProperty[];
 	public constructor(init?: Partial<FlConfig>) {
 		Object.assign(this, init);
 	}
