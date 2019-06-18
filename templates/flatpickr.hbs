@@ -6,6 +6,8 @@ if (!this.flatpickrInstance) {
 return;
 }
 this.flatpickrInstance.set("{{name}}",this.o{{capitalize name}});
+this.flatpickrInstance.destroy();
+this.attached();
 }
 {{/each}}
 {{#each arrays}}
@@ -34,15 +36,16 @@ splices: Array<ICollectionObserverSplice<any>>
 	}
 
 	{{/each}}
-	private initialiseProperties(){
+	private initialiseProperties(): any{
+	let config = {};
 	{{#each properties}}
 	if(this.o{{capitalize name}}){
-	this.flatpickrInstance.set("{{name}}",this.o{{capitalize name}});
+	config.{{name}} = this.o{{capitalize name}};
 	}
 	{{/each}}
 	{{#each arrays}}
 	if(this.o{{capitalize name}}){
-	this.flatpickrInstance.set("{{name}}",this.o{{capitalize name}});
+	config.{{name}} = this.o{{capitalize name}};
 	if (this.o{{capitalize name}} instanceof Array) {
 	this.o{{capitalize name}}Subscription = this.bindingEngine
 	.collectionObserver(this.o{{capitalize name}})
@@ -50,7 +53,7 @@ splices: Array<ICollectionObserverSplice<any>>
 	}
 	}
 	{{/each}}
-
+	return config;
 	}
 	private disposeProperties(){
 	{{#each arrays}}

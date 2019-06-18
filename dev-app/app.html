@@ -54,24 +54,23 @@
         ></or-datetimepicker>
     </div> -->
     <div>
-        <or-datetimepicker
-            placeholder="test"
-            o-date-format.bind="dateFormat"
-            o-values.bind="value"
-            o-mode="multiple"
-            o-disable.bind="disable"
-        ></or-datetimepicker>
+        <or-datetimepicker o-enable-time.bind="true"></or-datetimepicker>
     </div>
 
-    <!-- ${value}
     <template if.bind="value.length">
         <div repeat.for="date of value">
+            ${date.date}
+        </div>
+        <input type="checkbox" checked.bind="enableTime" />
+        <div repeat.for="date of value">
             <or-datetimepicker
+                o-enable-time.bind="enableTime"
+                o-inline.bind="enableTime"
                 placeholder="test"
                 o-date-format.bind="dateFormat"
                 o-max-date.bind="maxDate"
-                o-value.bind="date"
+                o-value.bind="date.date"
             ></or-datetimepicker>
         </div>
-    </template> -->
+    </template>
 </template>
