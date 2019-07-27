@@ -1,3 +1,5 @@
+import { Instance } from "flatpickr/dist/types/instance";
+
 export class App {
 	public message: string = "from Aurelia!";
 	public dateFormat: string = "m-d-Y";
@@ -11,11 +13,13 @@ export class App {
 	public testOnClose(detail) {
 		console.log(detail);
 	}
+	public flatpickrInstance: Instance;
 	clicked() {
 		// eslint-disable-next-line no-alert
 		// this.mode = "multiple";
 		// this.maxDate = new Date("2018-01-01");
 		// alert("A primary button click or a touch");
+		this.flatpickrInstance.open();
 		this.disable.push(new Date("2019-06-05"));
 		console.log(this.disable);
 	}

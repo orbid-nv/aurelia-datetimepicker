@@ -12,6 +12,7 @@ import { Instance } from "flatpickr/dist/types/instance";
 @autoinject()
 export class OrDatetimepicker {
 	public flatpickr: any = (Flatpickr as any).default || Flatpickr;
+	@bindable({ defaultBindingMode: bindingMode.fromView })
 	public flatpickrInstance: Instance;
 	public flatpickerElement: HTMLElement;
 	@bindable public config: any = {};
