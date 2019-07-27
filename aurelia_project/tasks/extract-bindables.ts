@@ -45,6 +45,14 @@ function convertType(type: any) {
 			break;
 	}
 }
+function dashCase(str) {
+	return str.replace(/[A-Z](?:(?=[^A-Z])|[A-Z]*(?=[A-Z][^A-Z]|$))/g, function(
+		s,
+		i
+	) {
+		return (i > 0 ? "-" : "") + s.toLowerCase();
+	});
+}
 function extractOptions(jsObj, json) {
 	var optionClasses = [];
 
@@ -60,14 +68,34 @@ function extractOptions(jsObj, json) {
 		)
 		.map(x => new FlProperty({ name: x.name, type: convertType(x.type) }));
 	var arrays = json.children[0].children[1].children
-		.filter(x => x.type.type === "array" && !x.name.startsWith("_"))
+		.filter(
+			x =>
+				x.type.type === "array" &&
+				!x.name.startsWith("_") &&
+				x.type.elementType.name !== "Hook"
+		)
 		.map(x => new FlProperty({ name: x.name, type: "any[]" }));
+	var hooks = json.children[0].children[1].children
+		.filter(
+			x =>
+				x.type.type === "array" &&
+				!x.name.startsWith("_") &&
+				x.type.elementType.name === "Hook"
+		)
+		.map(
+			x =>
+				new HookProperty({
+					name: x.name,
+					dashCaseName: dashCase(x.name)
+				})
+		);
 	gulp.src("./templates/flatpickr.hbs")
 		.pipe(
 			hbsAll("html", {
 				context: new FlConfig({
 					properties: properties,
-					arrays: arrays
+					arrays: arrays,
+					hooks: hooks
 				}),
 
 				partials: ["partials/*.hbs"],
@@ -130,6 +158,7 @@ function extractOptions(jsObj, json) {
 class FlConfig {
 	public properties: FlProperty[];
 	public arrays: FlProperty[];
+	public hooks: FlProperty[];
 	public constructor(init?: Partial<FlConfig>) {
 		Object.assign(this, init);
 	}
@@ -142,5 +171,11 @@ class FlProperty {
 		Object.assign(this, init);
 	}
 }
-
+class HookProperty {
+	public name: string;
+	public dashCaseName: string;
+	public constructor(init?: Partial<HookProperty>) {
+		Object.assign(this, init);
+	}
+}
 export default gulp.series(readTs, extractBindables);

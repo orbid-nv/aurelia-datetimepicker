@@ -36,8 +36,18 @@ splices: Array<ICollectionObserverSplice<any>>
 	}
 
 	{{/each}}
+	{{#each hooks}}
+	public o{{capitalize name}}(selectedDates, dateStr, instance) {
+	instance.element.dispatchEvent(
+	new CustomEvent("o-{{dashCaseName}}", {
+	bubbles: true,
+	detail: { selectedDates, dateStr, instance }
+	})
+	);
+	}
+	{{/each}}
 	private initialiseProperties(): any{
-	let config = {};
+	let config : any = {};
 	{{#each properties}}
 	if(this.o{{capitalize name}}){
 	config.{{name}} = this.o{{capitalize name}};
@@ -52,6 +62,9 @@ splices: Array<ICollectionObserverSplice<any>>
 	.subscribe(this.o{{capitalize name}}CollectionChanged.bind(this));
 	}
 	}
+	{{/each}}
+	{{#each hooks}}
+	config.{{name}} = this.o{{capitalize name}};
 	{{/each}}
 	return config;
 	}

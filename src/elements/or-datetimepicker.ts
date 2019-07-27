@@ -4,7 +4,7 @@ import {
 	bindingMode,
 	BindingEngine,
 	ICollectionObserverSplice,
-	Disposable,
+	Disposable
 } from "aurelia-framework";
 import * as Flatpickr from "flatpickr";
 import { Instance } from "flatpickr/dist/types/instance";
@@ -23,7 +23,7 @@ export class OrDatetimepicker {
 		let self = this;
 		this.flatpickrInstance = this.flatpickr(
 			this.flatpickerElement,
-			this.initialiseProperties(),
+			this.initialiseProperties()
 		);
 		this.flatpickrInstance.config.onChange.push(
 			(selectedDates: Date[], dateStr: string, instance: Instance) => {
@@ -40,7 +40,7 @@ export class OrDatetimepicker {
 						break;
 					}
 				}
-			},
+			}
 		);
 		if (this.oValue) {
 			this.flatpickrInstance.setDate(this.oValue);
@@ -58,7 +58,7 @@ export class OrDatetimepicker {
 	}
 	constructor(private bindingEngine: BindingEngine) {}
 	private collectionChanged(
-		splices: Array<ICollectionObserverSplice<string | Date>>,
+		splices: Array<ICollectionObserverSplice<string | Date>>
 	) {
 		this.flatpickrInstance.setDate(this.oValues);
 	}
@@ -435,7 +435,7 @@ export class OrDatetimepicker {
 		}
 		this.flatpickrInstance.set(
 			"shorthandCurrentMonth",
-			this.oShorthandCurrentMonth,
+			this.oShorthandCurrentMonth
 		);
 		this.flatpickrInstance.destroy();
 		this.attached();
@@ -509,7 +509,7 @@ export class OrDatetimepicker {
 		this.flatpickrInstance.set("disable", this.oDisable);
 	}
 	private oDisableCollectionChanged(
-		splices: Array<ICollectionObserverSplice<any>>,
+		splices: Array<ICollectionObserverSplice<any>>
 	) {
 		this.flatpickrInstance.set("disable", this.oDisable);
 	}
@@ -533,7 +533,7 @@ export class OrDatetimepicker {
 		this.flatpickrInstance.set("enable", this.oEnable);
 	}
 	private oEnableCollectionChanged(
-		splices: Array<ICollectionObserverSplice<any>>,
+		splices: Array<ICollectionObserverSplice<any>>
 	) {
 		this.flatpickrInstance.set("enable", this.oEnable);
 	}
@@ -552,318 +552,22 @@ export class OrDatetimepicker {
 			this.oIgnoredFocusElementsSubscription = this.bindingEngine
 				.collectionObserver(this.oIgnoredFocusElements)
 				.subscribe(
-					this.oIgnoredFocusElementsCollectionChanged.bind(this),
+					this.oIgnoredFocusElementsCollectionChanged.bind(this)
 				);
 		}
 
 		this.flatpickrInstance.set(
 			"ignoredFocusElements",
-			this.oIgnoredFocusElements,
+			this.oIgnoredFocusElements
 		);
 	}
 	private oIgnoredFocusElementsCollectionChanged(
-		splices: Array<ICollectionObserverSplice<any>>,
+		splices: Array<ICollectionObserverSplice<any>>
 	) {
 		this.flatpickrInstance.set(
 			"ignoredFocusElements",
-			this.oIgnoredFocusElements,
+			this.oIgnoredFocusElements
 		);
-	}
-
-	@bindable()
-	public oOnChange: any[];
-	public oOnChangeSubscription: Disposable;
-	private oOnChangeChanged(newValue, oldValue) {
-		if (!this.flatpickrInstance) {
-			return;
-		}
-		if (this.oOnChangeSubscription) {
-			this.oOnChangeSubscription.dispose();
-		}
-		if (this.oOnChange instanceof Array) {
-			this.oOnChangeSubscription = this.bindingEngine
-				.collectionObserver(this.oOnChange)
-				.subscribe(this.oOnChangeCollectionChanged.bind(this));
-		}
-
-		this.flatpickrInstance.set("onChange", this.oOnChange);
-	}
-	private oOnChangeCollectionChanged(
-		splices: Array<ICollectionObserverSplice<any>>,
-	) {
-		this.flatpickrInstance.set("onChange", this.oOnChange);
-	}
-
-	@bindable()
-	public oOnClose: any[];
-	public oOnCloseSubscription: Disposable;
-	private oOnCloseChanged(newValue, oldValue) {
-		if (!this.flatpickrInstance) {
-			return;
-		}
-		if (this.oOnCloseSubscription) {
-			this.oOnCloseSubscription.dispose();
-		}
-		if (this.oOnClose instanceof Array) {
-			this.oOnCloseSubscription = this.bindingEngine
-				.collectionObserver(this.oOnClose)
-				.subscribe(this.oOnCloseCollectionChanged.bind(this));
-		}
-
-		this.flatpickrInstance.set("onClose", this.oOnClose);
-	}
-	private oOnCloseCollectionChanged(
-		splices: Array<ICollectionObserverSplice<any>>,
-	) {
-		this.flatpickrInstance.set("onClose", this.oOnClose);
-	}
-
-	@bindable()
-	public oOnDayCreate: any[];
-	public oOnDayCreateSubscription: Disposable;
-	private oOnDayCreateChanged(newValue, oldValue) {
-		if (!this.flatpickrInstance) {
-			return;
-		}
-		if (this.oOnDayCreateSubscription) {
-			this.oOnDayCreateSubscription.dispose();
-		}
-		if (this.oOnDayCreate instanceof Array) {
-			this.oOnDayCreateSubscription = this.bindingEngine
-				.collectionObserver(this.oOnDayCreate)
-				.subscribe(this.oOnDayCreateCollectionChanged.bind(this));
-		}
-
-		this.flatpickrInstance.set("onDayCreate", this.oOnDayCreate);
-	}
-	private oOnDayCreateCollectionChanged(
-		splices: Array<ICollectionObserverSplice<any>>,
-	) {
-		this.flatpickrInstance.set("onDayCreate", this.oOnDayCreate);
-	}
-
-	@bindable()
-	public oOnDestroy: any[];
-	public oOnDestroySubscription: Disposable;
-	private oOnDestroyChanged(newValue, oldValue) {
-		if (!this.flatpickrInstance) {
-			return;
-		}
-		if (this.oOnDestroySubscription) {
-			this.oOnDestroySubscription.dispose();
-		}
-		if (this.oOnDestroy instanceof Array) {
-			this.oOnDestroySubscription = this.bindingEngine
-				.collectionObserver(this.oOnDestroy)
-				.subscribe(this.oOnDestroyCollectionChanged.bind(this));
-		}
-
-		this.flatpickrInstance.set("onDestroy", this.oOnDestroy);
-	}
-	private oOnDestroyCollectionChanged(
-		splices: Array<ICollectionObserverSplice<any>>,
-	) {
-		this.flatpickrInstance.set("onDestroy", this.oOnDestroy);
-	}
-
-	@bindable()
-	public oOnKeyDown: any[];
-	public oOnKeyDownSubscription: Disposable;
-	private oOnKeyDownChanged(newValue, oldValue) {
-		if (!this.flatpickrInstance) {
-			return;
-		}
-		if (this.oOnKeyDownSubscription) {
-			this.oOnKeyDownSubscription.dispose();
-		}
-		if (this.oOnKeyDown instanceof Array) {
-			this.oOnKeyDownSubscription = this.bindingEngine
-				.collectionObserver(this.oOnKeyDown)
-				.subscribe(this.oOnKeyDownCollectionChanged.bind(this));
-		}
-
-		this.flatpickrInstance.set("onKeyDown", this.oOnKeyDown);
-	}
-	private oOnKeyDownCollectionChanged(
-		splices: Array<ICollectionObserverSplice<any>>,
-	) {
-		this.flatpickrInstance.set("onKeyDown", this.oOnKeyDown);
-	}
-
-	@bindable()
-	public oOnMonthChange: any[];
-	public oOnMonthChangeSubscription: Disposable;
-	private oOnMonthChangeChanged(newValue, oldValue) {
-		if (!this.flatpickrInstance) {
-			return;
-		}
-		if (this.oOnMonthChangeSubscription) {
-			this.oOnMonthChangeSubscription.dispose();
-		}
-		if (this.oOnMonthChange instanceof Array) {
-			this.oOnMonthChangeSubscription = this.bindingEngine
-				.collectionObserver(this.oOnMonthChange)
-				.subscribe(this.oOnMonthChangeCollectionChanged.bind(this));
-		}
-
-		this.flatpickrInstance.set("onMonthChange", this.oOnMonthChange);
-	}
-	private oOnMonthChangeCollectionChanged(
-		splices: Array<ICollectionObserverSplice<any>>,
-	) {
-		this.flatpickrInstance.set("onMonthChange", this.oOnMonthChange);
-	}
-
-	@bindable()
-	public oOnOpen: any[];
-	public oOnOpenSubscription: Disposable;
-	private oOnOpenChanged(newValue, oldValue) {
-		if (!this.flatpickrInstance) {
-			return;
-		}
-		if (this.oOnOpenSubscription) {
-			this.oOnOpenSubscription.dispose();
-		}
-		if (this.oOnOpen instanceof Array) {
-			this.oOnOpenSubscription = this.bindingEngine
-				.collectionObserver(this.oOnOpen)
-				.subscribe(this.oOnOpenCollectionChanged.bind(this));
-		}
-
-		this.flatpickrInstance.set("onOpen", this.oOnOpen);
-	}
-	private oOnOpenCollectionChanged(
-		splices: Array<ICollectionObserverSplice<any>>,
-	) {
-		this.flatpickrInstance.set("onOpen", this.oOnOpen);
-	}
-
-	@bindable()
-	public oOnParseConfig: any[];
-	public oOnParseConfigSubscription: Disposable;
-	private oOnParseConfigChanged(newValue, oldValue) {
-		if (!this.flatpickrInstance) {
-			return;
-		}
-		if (this.oOnParseConfigSubscription) {
-			this.oOnParseConfigSubscription.dispose();
-		}
-		if (this.oOnParseConfig instanceof Array) {
-			this.oOnParseConfigSubscription = this.bindingEngine
-				.collectionObserver(this.oOnParseConfig)
-				.subscribe(this.oOnParseConfigCollectionChanged.bind(this));
-		}
-
-		this.flatpickrInstance.set("onParseConfig", this.oOnParseConfig);
-	}
-	private oOnParseConfigCollectionChanged(
-		splices: Array<ICollectionObserverSplice<any>>,
-	) {
-		this.flatpickrInstance.set("onParseConfig", this.oOnParseConfig);
-	}
-
-	@bindable()
-	public oOnPreCalendarPosition: any[];
-	public oOnPreCalendarPositionSubscription: Disposable;
-	private oOnPreCalendarPositionChanged(newValue, oldValue) {
-		if (!this.flatpickrInstance) {
-			return;
-		}
-		if (this.oOnPreCalendarPositionSubscription) {
-			this.oOnPreCalendarPositionSubscription.dispose();
-		}
-		if (this.oOnPreCalendarPosition instanceof Array) {
-			this.oOnPreCalendarPositionSubscription = this.bindingEngine
-				.collectionObserver(this.oOnPreCalendarPosition)
-				.subscribe(
-					this.oOnPreCalendarPositionCollectionChanged.bind(this),
-				);
-		}
-
-		this.flatpickrInstance.set(
-			"onPreCalendarPosition",
-			this.oOnPreCalendarPosition,
-		);
-	}
-	private oOnPreCalendarPositionCollectionChanged(
-		splices: Array<ICollectionObserverSplice<any>>,
-	) {
-		this.flatpickrInstance.set(
-			"onPreCalendarPosition",
-			this.oOnPreCalendarPosition,
-		);
-	}
-
-	@bindable()
-	public oOnReady: any[];
-	public oOnReadySubscription: Disposable;
-	private oOnReadyChanged(newValue, oldValue) {
-		if (!this.flatpickrInstance) {
-			return;
-		}
-		if (this.oOnReadySubscription) {
-			this.oOnReadySubscription.dispose();
-		}
-		if (this.oOnReady instanceof Array) {
-			this.oOnReadySubscription = this.bindingEngine
-				.collectionObserver(this.oOnReady)
-				.subscribe(this.oOnReadyCollectionChanged.bind(this));
-		}
-
-		this.flatpickrInstance.set("onReady", this.oOnReady);
-	}
-	private oOnReadyCollectionChanged(
-		splices: Array<ICollectionObserverSplice<any>>,
-	) {
-		this.flatpickrInstance.set("onReady", this.oOnReady);
-	}
-
-	@bindable()
-	public oOnValueUpdate: any[];
-	public oOnValueUpdateSubscription: Disposable;
-	private oOnValueUpdateChanged(newValue, oldValue) {
-		if (!this.flatpickrInstance) {
-			return;
-		}
-		if (this.oOnValueUpdateSubscription) {
-			this.oOnValueUpdateSubscription.dispose();
-		}
-		if (this.oOnValueUpdate instanceof Array) {
-			this.oOnValueUpdateSubscription = this.bindingEngine
-				.collectionObserver(this.oOnValueUpdate)
-				.subscribe(this.oOnValueUpdateCollectionChanged.bind(this));
-		}
-
-		this.flatpickrInstance.set("onValueUpdate", this.oOnValueUpdate);
-	}
-	private oOnValueUpdateCollectionChanged(
-		splices: Array<ICollectionObserverSplice<any>>,
-	) {
-		this.flatpickrInstance.set("onValueUpdate", this.oOnValueUpdate);
-	}
-
-	@bindable()
-	public oOnYearChange: any[];
-	public oOnYearChangeSubscription: Disposable;
-	private oOnYearChangeChanged(newValue, oldValue) {
-		if (!this.flatpickrInstance) {
-			return;
-		}
-		if (this.oOnYearChangeSubscription) {
-			this.oOnYearChangeSubscription.dispose();
-		}
-		if (this.oOnYearChange instanceof Array) {
-			this.oOnYearChangeSubscription = this.bindingEngine
-				.collectionObserver(this.oOnYearChange)
-				.subscribe(this.oOnYearChangeCollectionChanged.bind(this));
-		}
-
-		this.flatpickrInstance.set("onYearChange", this.oOnYearChange);
-	}
-	private oOnYearChangeCollectionChanged(
-		splices: Array<ICollectionObserverSplice<any>>,
-	) {
-		this.flatpickrInstance.set("onYearChange", this.oOnYearChange);
 	}
 
 	@bindable()
@@ -885,11 +589,107 @@ export class OrDatetimepicker {
 		this.flatpickrInstance.set("plugins", this.oPlugins);
 	}
 	private oPluginsCollectionChanged(
-		splices: Array<ICollectionObserverSplice<any>>,
+		splices: Array<ICollectionObserverSplice<any>>
 	) {
 		this.flatpickrInstance.set("plugins", this.oPlugins);
 	}
 
+	public oOnChange(selectedDates, dateStr, instance) {
+		instance.element.dispatchEvent(
+			new CustomEvent("o-on-change", {
+				bubbles: true,
+				detail: { selectedDates, dateStr, instance }
+			})
+		);
+	}
+	public oOnClose(selectedDates, dateStr, instance) {
+		instance.element.dispatchEvent(
+			new CustomEvent("o-on-close", {
+				bubbles: true,
+				detail: { selectedDates, dateStr, instance }
+			})
+		);
+	}
+	public oOnDayCreate(selectedDates, dateStr, instance) {
+		instance.element.dispatchEvent(
+			new CustomEvent("o-on-day-create", {
+				bubbles: true,
+				detail: { selectedDates, dateStr, instance }
+			})
+		);
+	}
+	public oOnDestroy(selectedDates, dateStr, instance) {
+		instance.element.dispatchEvent(
+			new CustomEvent("o-on-destroy", {
+				bubbles: true,
+				detail: { selectedDates, dateStr, instance }
+			})
+		);
+	}
+	public oOnKeyDown(selectedDates, dateStr, instance) {
+		instance.element.dispatchEvent(
+			new CustomEvent("o-on-key-down", {
+				bubbles: true,
+				detail: { selectedDates, dateStr, instance }
+			})
+		);
+	}
+	public oOnMonthChange(selectedDates, dateStr, instance) {
+		instance.element.dispatchEvent(
+			new CustomEvent("o-on-month-change", {
+				bubbles: true,
+				detail: { selectedDates, dateStr, instance }
+			})
+		);
+	}
+	public oOnOpen(selectedDates, dateStr, instance) {
+		instance.element.dispatchEvent(
+			new CustomEvent("o-on-open", {
+				bubbles: true,
+				detail: { selectedDates, dateStr, instance }
+			})
+		);
+	}
+	public oOnParseConfig(selectedDates, dateStr, instance) {
+		instance.element.dispatchEvent(
+			new CustomEvent("o-on-parse-config", {
+				bubbles: true,
+				detail: { selectedDates, dateStr, instance }
+			})
+		);
+	}
+	public oOnPreCalendarPosition(selectedDates, dateStr, instance) {
+		instance.element.dispatchEvent(
+			new CustomEvent("o-on-pre-calendar-position", {
+				bubbles: true,
+				detail: { selectedDates, dateStr, instance }
+			})
+		);
+	}
+	public oOnReady(selectedDates, dateStr, instance) {
+		instance.element.dispatchEvent(
+			new CustomEvent("o-on-ready", {
+				bubbles: true,
+				detail: { selectedDates, dateStr, instance }
+			})
+		);
+	}
+	public oOnValueUpdate(selectedDates, dateStr, instance) {
+		instance.element.dispatchEvent(
+			new CustomEvent("o-on-value-update", {
+				bubbles: true,
+				detail: { selectedDates, dateStr, instance }
+			})
+		);
+	}
+	public oOnYearChange(selectedDates, dateStr, instance) {
+		instance.element.dispatchEvent(
+			new CustomEvent("o-on-year-change", {
+				bubbles: true,
+				detail: { selectedDates, dateStr, instance }
+			})
+		);
+	}
 	private initialiseProperties(): any {
 		let config: any = {};
 		if (this.oAllowInput) {
@@ -1025,106 +825,8 @@ export class OrDatetimepicker {
 				this.oIgnoredFocusElementsSubscription = this.bindingEngine
 					.collectionObserver(this.oIgnoredFocusElements)
 					.subscribe(
-						this.oIgnoredFocusElementsCollectionChanged.bind(this),
+						this.oIgnoredFocusElementsCollectionChanged.bind(this)
 					);
-			}
-		}
-		if (this.oOnChange) {
-			config.onChange = this.oOnChange;
-			if (this.oOnChange instanceof Array) {
-				this.oOnChangeSubscription = this.bindingEngine
-					.collectionObserver(this.oOnChange)
-					.subscribe(this.oOnChangeCollectionChanged.bind(this));
-			}
-		}
-		if (this.oOnClose) {
-			config.onClose = this.oOnClose;
-			if (this.oOnClose instanceof Array) {
-				this.oOnCloseSubscription = this.bindingEngine
-					.collectionObserver(this.oOnClose)
-					.subscribe(this.oOnCloseCollectionChanged.bind(this));
-			}
-		}
-		if (this.oOnDayCreate) {
-			config.onDayCreate = this.oOnDayCreate;
-			if (this.oOnDayCreate instanceof Array) {
-				this.oOnDayCreateSubscription = this.bindingEngine
-					.collectionObserver(this.oOnDayCreate)
-					.subscribe(this.oOnDayCreateCollectionChanged.bind(this));
-			}
-		}
-		if (this.oOnDestroy) {
-			config.onDestroy = this.oOnDestroy;
-			if (this.oOnDestroy instanceof Array) {
-				this.oOnDestroySubscription = this.bindingEngine
-					.collectionObserver(this.oOnDestroy)
-					.subscribe(this.oOnDestroyCollectionChanged.bind(this));
-			}
-		}
-		if (this.oOnKeyDown) {
-			config.onKeyDown = this.oOnKeyDown;
-			if (this.oOnKeyDown instanceof Array) {
-				this.oOnKeyDownSubscription = this.bindingEngine
-					.collectionObserver(this.oOnKeyDown)
-					.subscribe(this.oOnKeyDownCollectionChanged.bind(this));
-			}
-		}
-		if (this.oOnMonthChange) {
-			config.onMonthChange = this.oOnMonthChange;
-			if (this.oOnMonthChange instanceof Array) {
-				this.oOnMonthChangeSubscription = this.bindingEngine
-					.collectionObserver(this.oOnMonthChange)
-					.subscribe(this.oOnMonthChangeCollectionChanged.bind(this));
-			}
-		}
-		if (this.oOnOpen) {
-			config.onOpen = this.oOnOpen;
-			if (this.oOnOpen instanceof Array) {
-				this.oOnOpenSubscription = this.bindingEngine
-					.collectionObserver(this.oOnOpen)
-					.subscribe(this.oOnOpenCollectionChanged.bind(this));
-			}
-		}
-		if (this.oOnParseConfig) {
-			config.onParseConfig = this.oOnParseConfig;
-			if (this.oOnParseConfig instanceof Array) {
-				this.oOnParseConfigSubscription = this.bindingEngine
-					.collectionObserver(this.oOnParseConfig)
-					.subscribe(this.oOnParseConfigCollectionChanged.bind(this));
-			}
-		}
-		if (this.oOnPreCalendarPosition) {
-			config.onPreCalendarPosition = this.oOnPreCalendarPosition;
-			if (this.oOnPreCalendarPosition instanceof Array) {
-				this.oOnPreCalendarPositionSubscription = this.bindingEngine
-					.collectionObserver(this.oOnPreCalendarPosition)
-					.subscribe(
-						this.oOnPreCalendarPositionCollectionChanged.bind(this),
-					);
-			}
-		}
-		if (this.oOnReady) {
-			config.onReady = this.oOnReady;
-			if (this.oOnReady instanceof Array) {
-				this.oOnReadySubscription = this.bindingEngine
-					.collectionObserver(this.oOnReady)
-					.subscribe(this.oOnReadyCollectionChanged.bind(this));
-			}
-		}
-		if (this.oOnValueUpdate) {
-			config.onValueUpdate = this.oOnValueUpdate;
-			if (this.oOnValueUpdate instanceof Array) {
-				this.oOnValueUpdateSubscription = this.bindingEngine
-					.collectionObserver(this.oOnValueUpdate)
-					.subscribe(this.oOnValueUpdateCollectionChanged.bind(this));
-			}
-		}
-		if (this.oOnYearChange) {
-			config.onYearChange = this.oOnYearChange;
-			if (this.oOnYearChange instanceof Array) {
-				this.oOnYearChangeSubscription = this.bindingEngine
-					.collectionObserver(this.oOnYearChange)
-					.subscribe(this.oOnYearChangeCollectionChanged.bind(this));
 			}
 		}
 		if (this.oPlugins) {
@@ -1135,24 +837,24 @@ export class OrDatetimepicker {
 					.subscribe(this.oPluginsCollectionChanged.bind(this));
 			}
 		}
+		config.onChange = this.oOnChange;
+		config.onClose = this.oOnClose;
+		config.onDayCreate = this.oOnDayCreate;
+		config.onDestroy = this.oOnDestroy;
+		config.onKeyDown = this.oOnKeyDown;
+		config.onMonthChange = this.oOnMonthChange;
+		config.onOpen = this.oOnOpen;
+		config.onParseConfig = this.oOnParseConfig;
+		config.onPreCalendarPosition = this.oOnPreCalendarPosition;
+		config.onReady = this.oOnReady;
+		config.onValueUpdate = this.oOnValueUpdate;
+		config.onYearChange = this.oOnYearChange;
 		return config;
 	}
 	private disposeProperties() {
 		this.oDisableSubscription.dispose();
 		this.oEnableSubscription.dispose();
 		this.oIgnoredFocusElementsSubscription.dispose();
-		this.oOnChangeSubscription.dispose();
-		this.oOnCloseSubscription.dispose();
-		this.oOnDayCreateSubscription.dispose();
-		this.oOnDestroySubscription.dispose();
-		this.oOnKeyDownSubscription.dispose();
-		this.oOnMonthChangeSubscription.dispose();
-		this.oOnOpenSubscription.dispose();
-		this.oOnParseConfigSubscription.dispose();
-		this.oOnPreCalendarPositionSubscription.dispose();
-		this.oOnReadySubscription.dispose();
-		this.oOnValueUpdateSubscription.dispose();
-		this.oOnYearChangeSubscription.dispose();
 		this.oPluginsSubscription.dispose();
 	} //--- END GENERATED CODE ---
 }

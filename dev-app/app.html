@@ -54,10 +54,17 @@
         ></or-datetimepicker>
     </div> -->
     <div>
-        <or-datetimepicker o-enable-time.bind="true"></or-datetimepicker>
+        <!-- <or-datetimepicker o-enable-time.bind="true"></or-datetimepicker> -->
+        <p>test</p>
+        <or-datetimepicker
+            o-on-close.delegate="testOnClose($event.detail)"
+            o-on-open.delegate="testOnClose($event.detail)"
+            o-value.bind="maxDate"
+        ></or-datetimepicker>
+        <p>test</p>
     </div>
 
-    <template if.bind="value.length">
+    <!-- <template if.bind="value.length">
         <div repeat.for="date of value">
             ${date.date}
         </div>
@@ -72,5 +79,5 @@
                 o-value.bind="date.date"
             ></or-datetimepicker>
         </div>
-    </template>
+    </template> -->
 </template>
