@@ -1,71 +1,71 @@
 {
-  "name": "aurelia-datetimepicker",
-  "description": "An Aurelia plugin project.",
-  "version": "0.1.0",
-  "repository": {
-    "type": "???",
-    "url": "???"
-  },
-  "license": "UNLICENSED",
-  "devDependencies": {
-    "@types/jasmine": "^2.8.9",
-    "@types/node": "^10.11.6",
-    "aurelia-animator-css": "^1.0.4",
-    "aurelia-bootstrapper": "^2.3.2",
-    "aurelia-cli": "^1.0.0",
-    "aurelia-testing": "^1.0.0",
-    "aurelia-tools": "^2.0.0",
-    "browser-sync": "^2.26.3",
-    "connect-history-api-fallback": "^1.6.0",
-    "debounce": "^1.2.0",
-    "del": "^3.0.0",
-    "gulp": "^4.0.0",
-    "gulp-handlebars": "^5.0.2",
-    "gulp-handlebars-all": "^0.1.1",
-    "gulp-notify": "^3.2.0",
-    "gulp-plumber": "^1.2.1",
-    "gulp-rename": "^1.4.0",
-    "gulp-replace": "^1.0.0",
-    "gulp-tslint": "^8.1.4",
-    "gulp-typedoc": "^2.2.2",
-    "gulp-typescript": "^5.0.0",
-    "gulp-watch": "^5.0.1",
-    "handlebars-helpers": "^0.10.0",
-    "jasmine-core": "^3.2.1",
-    "karma": "^4.1.0",
-    "karma-chrome-launcher": "^2.2.0",
-    "karma-jasmine": "^2.0.1",
-    "karma-sourcemap-loader": "^0.3.7",
-    "karma-typescript-preprocessor": "^0.4.0",
-    "merge2": "^1.2.3",
-    "minimatch": "^3.0.4",
-    "promise-polyfill": "^8.1.0",
-    "requirejs": "^2.3.6",
-    "text": "requirejs/text#latest",
-    "through2": "^3.0.0",
-    "tslint": "^5.13.0",
-    "typedoc": "^0.14.2",
-    "typescript": "^3.1.2",
-    "vinyl-fs": "^3.0.3"
-  },
-  "scripts": {
-    "build": "au build-plugin",
-    "start": "au run",
-    "prepare": "npm run build",
-    "pretest": "au lint",
-    "preversion": "au test",
-    "test": "au test"
-  },
-  "engines": {
-    "node": ">=8.9.0"
-  },
-  "main": "dist/commonjs/index.js",
-  "module": "dist/native-modules/index.js",
-  "private": true,
-  "files": [
-    "dist"
-  ],
-  "dependencies": {
-    "flatpickr": "^4.6.1"
-  }
+    "name": "aurelia-datetimepicker",
+    "description": "An Aurelia plugin project.",
+    "version": "0.1.0",
+    "repository": {
+        "type": "???",
+        "url": "???"
+    },
+    "license": "UNLICENSED",
+    "devDependencies": {
+        "@types/jasmine": "^2.8.9",
+        "@types/node": "^10.11.6",
+        "aurelia-animator-css": "^1.0.4",
+        "aurelia-bootstrapper": "^2.3.2",
+        "aurelia-cli": "^1.0.2",
+        "aurelia-testing": "^1.0.0",
+        "aurelia-tools": "^2.0.0",
+        "browser-sync": "^2.26.3",
+        "connect-history-api-fallback": "^1.6.0",
+        "debounce": "^1.2.0",
+        "del": "^3.0.0",
+        "gulp": "^4.0.0",
+        "gulp-handlebars": "^5.0.2",
+        "gulp-handlebars-all": "^0.1.1",
+        "gulp-notify": "^3.2.0",
+        "gulp-plumber": "^1.2.1",
+        "gulp-rename": "^1.4.0",
+        "gulp-replace": "^1.0.0",
+        "gulp-tslint": "^8.1.4",
+        "gulp-typedoc": "^2.2.2",
+        "gulp-typescript": "^5.0.0",
+        "gulp-watch": "^5.0.1",
+        "handlebars-helpers": "^0.10.0",
+        "jasmine-core": "^3.2.1",
+        "karma": "^4.1.0",
+        "karma-chrome-launcher": "^2.2.0",
+        "karma-jasmine": "^2.0.1",
+        "karma-sourcemap-loader": "^0.3.7",
+        "karma-typescript-preprocessor": "^0.4.0",
+        "merge2": "^1.2.3",
+        "minimatch": "^3.0.4",
+        "promise-polyfill": "^8.1.0",
+        "requirejs": "^2.3.6",
+        "text": "requirejs/text#latest",
+        "through2": "^3.0.0",
+        "tslint": "^5.13.0",
+        "typedoc": "^0.14.2",
+        "typescript": "^3.1.2",
+        "vinyl-fs": "^3.0.3"
+    },
+    "scripts": {
+        "build": "au build-plugin",
+        "start": "au run",
+        "prepare": "npm run build",
+        "pretest": "au lint",
+        "preversion": "au test",
+        "test": "au test"
+    },
+    "engines": {
+        "node": ">=8.9.0"
+    },
+    "main": "dist/commonjs/index.js",
+    "module": "dist/native-modules/index.js",
+    "private": true,
+    "files": [
+        "dist"
+    ],
+    "dependencies": {
+        "flatpickr": "^4.6.2"
+    }
 }
