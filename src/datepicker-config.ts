@@ -1,0 +1,57 @@
+//--- GENERATED CODE ---
+export class DatepickerConfig {
+public allowInput:boolean;
+public altFormat:string;
+public altInput:boolean;
+public altInputClass:string;
+public animate:boolean;
+public ariaDateFormat:string;
+public clickOpens:boolean;
+public closeOnSelect:boolean;
+public conjunction:string;
+public dateFormat:string;
+public defaultDate:"undefined"|"undefined";
+public defaultHour:number;
+public defaultMinute:number;
+public defaultSeconds:number;
+public disableMobile:boolean;
+public enableSeconds:boolean;
+public enableTime:boolean;
+public hourIncrement:number;
+public inline:boolean;
+public locale:"undefined"|"undefined";
+public maxDate:Date;
+public maxTime:Date;
+public minDate:Date;
+public minTime:Date;
+public minuteIncrement:number;
+public mode:"single"|"multiple"|"range"|"time";
+public nextArrow:string;
+public noCalendar:boolean;
+public now:Date;
+public position:"auto"|"above"|"below";
+public prevArrow:string;
+public shorthandCurrentMonth:boolean;
+public showMonths:number;
+public static:boolean;
+public time_24hr:boolean;
+public weekNumbers:boolean;
+public wrap:boolean;
+public disable:any[];
+public enable:any[];
+public ignoredFocusElements:any[];
+public plugins:any[];
+public onChange: (selectedDates: any, dateStr: any, instance: any) => void;
+public onClose: (selectedDates: any, dateStr: any, instance: any) => void;
+public onDayCreate: (selectedDates: any, dateStr: any, instance: any) => void;
+public onDestroy: (selectedDates: any, dateStr: any, instance: any) => void;
+public onKeyDown: (selectedDates: any, dateStr: any, instance: any) => void;
+public onMonthChange: (selectedDates: any, dateStr: any, instance: any) => void;
+public onOpen: (selectedDates: any, dateStr: any, instance: any) => void;
+public onParseConfig: (selectedDates: any, dateStr: any, instance: any) => void;
+public onPreCalendarPosition: (selectedDates: any, dateStr: any, instance: any) => void;
+public onReady: (selectedDates: any, dateStr: any, instance: any) => void;
+public onValueUpdate: (selectedDates: any, dateStr: any, instance: any) => void;
+public onYearChange: (selectedDates: any, dateStr: any, instance: any) => void;
+//--- END GENERATED CODE ---
+}

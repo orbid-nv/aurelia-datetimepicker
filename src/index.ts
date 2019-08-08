@@ -1,12 +1,19 @@
 import { FrameworkConfiguration } from "aurelia-framework";
 import { PLATFORM } from "aurelia-pal";
+import { DatepickerConfig } from "./datepicker-config";
 
-export function configure(config: FrameworkConfiguration) {
-  config.globalResources([
-    PLATFORM.moduleName("./attributes/color"),
-    PLATFORM.moduleName("./value-converters/upcase"),
-    PLATFORM.moduleName("./binding-behaviors/primary-click"),
-    PLATFORM.moduleName("./elements/hello-world"),
-    PLATFORM.moduleName("./elements/or-datetimepicker")
-  ]);
+export function configure(
+	config: FrameworkConfiguration,
+	callback?: (config: DatepickerConfig) => void,
+): void | Promise<void> {
+	config.globalResources([
+		PLATFORM.moduleName("./elements/or-datetimepicker"),
+	]);
+
+	let instance = config.container.get(DatepickerConfig) as DatepickerConfig;
+
+	// Do we have a callback function?
+	if (callback !== undefined && typeof callback === "function") {
+		callback(instance);
+	}
 }

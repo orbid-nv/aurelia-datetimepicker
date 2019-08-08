@@ -15,8 +15,8 @@ function readTs() {
 			name: "flatpickr-docs",
 			mode: "modules",
 			excludeExternals: true,
-			version: true
-		} as typedoc.Options)
+			version: true,
+		} as typedoc.Options),
 	);
 }
 
@@ -48,7 +48,7 @@ function convertType(type: any) {
 function dashCase(str) {
 	return str.replace(/[A-Z](?:(?=[^A-Z])|[A-Z]*(?=[A-Z][^A-Z]|$))/g, function(
 		s,
-		i
+		i,
 	) {
 		return (i > 0 ? "-" : "") + s.toLowerCase();
 	});
@@ -64,7 +64,7 @@ function extractOptions(jsObj, json) {
 				(x.type.type === "intrinsic" ||
 					(x.type.type === "reference" && x.type.name === "Date") ||
 					x.type.type === "union") &&
-				!x.name.startsWith("_")
+				!x.name.startsWith("_"),
 		)
 		.map(x => new FlProperty({ name: x.name, type: convertType(x.type) }));
 	var arrays = json.children[0].children[1].children
@@ -72,7 +72,7 @@ function extractOptions(jsObj, json) {
 			x =>
 				x.type.type === "array" &&
 				!x.name.startsWith("_") &&
-				x.type.elementType.name !== "Hook"
+				x.type.elementType.name !== "Hook",
 		)
 		.map(x => new FlProperty({ name: x.name, type: "any[]" }));
 	var hooks = json.children[0].children[1].children
@@ -80,36 +80,62 @@ function extractOptions(jsObj, json) {
 			x =>
 				x.type.type === "array" &&
 				!x.name.startsWith("_") &&
-				x.type.elementType.name === "Hook"
+				x.type.elementType.name === "Hook",
 		)
 		.map(
 			x =>
 				new HookProperty({
 					name: x.name,
-					dashCaseName: dashCase(x.name)
-				})
+					dashCaseName: dashCase(x.name),
+				}),
 		);
+
+	gulp.src("./templates/config.hbs")
+		.pipe(
+			hbsAll("html", {
+				context: new FlConfig({
+					properties: properties,
+					arrays: arrays,
+					hooks: hooks,
+				}),
+
+				partials: ["partials/*.hbs"],
+
+				helpers: hbHelpers(),
+			}),
+		)
+		.on("data", function(file) {
+			gulp.src("./src/datepicker-config.ts")
+				.pipe(
+					replace(
+						/(?<=\/\/--- GENERATED CODE ---)[\s\S]*?(?=\/\/--- END GENERATED CODE ---)/,
+						"\n" + file.contents.toString(),
+					),
+				)
+				.pipe(gulp.dest("./src/"));
+		});
+
 	gulp.src("./templates/flatpickr.hbs")
 		.pipe(
 			hbsAll("html", {
 				context: new FlConfig({
 					properties: properties,
 					arrays: arrays,
-					hooks: hooks
+					hooks: hooks,
 				}),
 
 				partials: ["partials/*.hbs"],
 
-				helpers: hbHelpers()
-			})
+				helpers: hbHelpers(),
+			}),
 		)
 		.on("data", function(file) {
 			gulp.src("./src/elements/or-datetimepicker.ts")
 				.pipe(
 					replace(
 						/(?<=\/\/--- GENERATED CODE ---)[\s\S]*?(?=\/\/--- END GENERATED CODE ---)/,
-						"\n" + file.contents.toString()
-					)
+						"\n" + file.contents.toString(),
+					),
 				)
 				.pipe(gulp.dest("./src/elements/"));
 		});

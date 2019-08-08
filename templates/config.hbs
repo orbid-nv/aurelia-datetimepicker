@@ -1,0 +1,10 @@
+export class DatepickerConfig {
+{{#each properties}}
+public {{name}}:{{{type}}};
+{{/each}}
+{{#each arrays}}
+public {{name}}:{{{type}}};
+{{/each}}
+{{#each hooks}}
+public {{name}}: (selectedDates: any, dateStr: any, instance: any) => void;
+{{/each}}

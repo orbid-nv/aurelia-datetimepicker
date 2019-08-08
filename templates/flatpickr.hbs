@@ -47,10 +47,12 @@ splices: Array<ICollectionObserverSplice<any>>
 	}
 	{{/each}}
 	private initialiseProperties(): any{
-	let config : any = {};
+	let config = new DatepickerConfig();
 	{{#each properties}}
 	if(this.o{{capitalize name}}){
 	config.{{name}} = this.o{{capitalize name}};
+	} else if(this.defaultConfig.{{name}}) {
+	config.{{name}} = this.defaultConfig.{{name}};
 	}
 	{{/each}}
 	{{#each arrays}}

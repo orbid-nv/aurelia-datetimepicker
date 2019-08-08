@@ -1,4 +1,4 @@
-import { Instance } from "flatpickr/dist/types/instance";
+import { OrDatetimepicker } from "elements/or-datetimepicker";
 
 export class App {
 	public message: string = "from Aurelia!";
@@ -6,20 +6,20 @@ export class App {
 	public maxDate: Date = new Date();
 	public value: any[] = [
 		{ date: new Date("2019-05-02") },
-		{ date: new Date("2019-05-01") }
+		{ date: new Date("2019-05-01") },
 	];
 	public objValue: any[] = [{ name: "test" }, { name: "test2" }];
 	public mode: string = "single";
 	public testOnClose(detail) {
 		console.log(detail);
 	}
-	public flatpickrInstance: Instance;
+	public flatpickrInstance: OrDatetimepicker;
 	clicked() {
 		// eslint-disable-next-line no-alert
 		// this.mode = "multiple";
 		// this.maxDate = new Date("2018-01-01");
 		// alert("A primary button click or a touch");
-		this.flatpickrInstance.open();
+		this.flatpickrInstance.flatpickrInstance.open();
 		this.disable.push(new Date("2019-06-05"));
 		console.log(this.disable);
 	}
@@ -28,6 +28,6 @@ export class App {
 	public disable: any[] = [
 		function(date) {
 			return date.getDay() === 0 || date.getDay() === 6;
-		}
+		},
 	];
 }
