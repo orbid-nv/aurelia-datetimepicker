@@ -1,5 +1,52 @@
 # `aurelia-datetimepicker`
 
+## This project aims to provide an aurelia-friendly wrapper for the https://flatpickr.js.org/ datetimepicker
+
+## This project is not production ready, we are still setting things up at this stage
+
+### Dependencies, apart from the core aurelia modules:
+
+```
+flatpickr ^4.6.2
+```
+
+## Usage
+
+### Configuration
+
+```typescript
+//insert following code in aurelia main.ts
+aurelia.use.plugin("aurelia-datetimepicker", (config: DatepickerConfig) => {
+    config.dateFormat = "Y-m-d H:i";
+    //all instantiated pickers will use these defaults,
+    //unless they are overruled by a binding
+});
+```
+
+### example.html
+
+```html
+<template>
+    <h1>Hello, this is an example for aurelia-datetimepicker</h1>
+    <div>
+        <or-datetimepicker
+            o-disable.bind="disable"
+            o-on-close.delegate="testOnClose($event.detail)"
+            o-on-open.delegate="testOnClose($event.detail)"
+            o-value.bind="maxDate"
+            view-model.ref="dateTimePickerInstance"
+        ></or-datetimepicker>
+    </div>
+</template>
+```
+
+### what makes this project :sparkles: special :sparkles:
+
+We wanted to create a wrapper that exposes every single configuration element of flatpickr as a bindable property / custom event, instead of just wrapping the whole config object and making that bindable.
+In order to do this, we generate most of our binding code based on the typings flatpickr provides with typedoc and handlebars.
+
+## How to dev and run
+
 This project is bootstrapped by [aurelia-cli](https://github.com/aurelia/cli).
 
 This Aurelia plugin project has a built-in dev app (with CLI built-in bundler and RequireJS) to simplify development.
@@ -12,35 +59,16 @@ This Aurelia plugin project has a built-in dev app (with CLI built-in bundler an
 
 Note aurelia-cli doesn't provide a plugin skeleton with Webpack setup (not yet), but this plugin can be consumed by any app using Webpack, or CLI built-in bundler, or jspm.
 
-## How to write an Aurelia plugin
-
-For a full length tutorial, visit [Aurelia plugin guide](https://aurelia.io/docs/plugins/write-new-plugin).
-
-Here is some basics. You can create new custom element, custom attribute, value converter or binding behavior manually, or use command `au generate` to help.
-```shell
-au generate element some-name
-au generate attribute some-name
-au generate value-converter some-name
-au generate binding-behavior some-name
-```
-
-By default, the cli generates command generates files in following folders:
-```
-src/elements
-src/attributes
-src/value-converters
-src/binding-behaviors
-```
-
 Note the folder structure is only to help you organising the files, it's not a requirement of Aurelia. You can manually create new element (or other thing) anywhere in `src/`.
 
 After you added some new file, you need to register it in `src/index.ts`. Like this:
+
 ```js
 config.globalResources([
-  // ...
-  PLATFORM.moduleName('./path/to/new-file-without-ext')
+    // ...
+    PLATFORM.moduleName("./path/to/new-file-without-ext"),
 ]);
-````
+```
 
 The usage of `PLATFORM.moduleName` wrapper is mandatory. It's needed for your plugin to be consumed by any app using webpack, CLI built-in bundler, or jspm.
 
@@ -49,13 +77,13 @@ The usage of `PLATFORM.moduleName` wrapper is mandatory. It's needed for your pl
 In dev app, when you need to import something from the inner plugin (for example, importing a class for dependency injection), use special name `"resources"` to reference the inner plugin.
 
 ```js
-import {autoinject} from 'aurelia-framework';
+import { autoinject } from "aurelia-framework";
 // "resources" refers the inner plugin src/index.ts
-import {MyService} from 'resources';
+import { MyService } from "resources";
 
 @autoinject()
 export class App {
-  constructor(myService: MyService) {}
+    constructor(myService: MyService) {}
 }
 ```
 
@@ -66,6 +94,7 @@ By default, this plugin has no "dependencies" in package.json. Theoretically thi
 Ideally you need to carefully add those `aurelia-pal` (`aurelia-binding`...) to "dependencies" in package.json. But in practice you don't have to. Because every app that consumes this plugin will have full Aurelia core packages installed.
 
 Furthermore, there are two benefits by leaving those dependencies out of plugin's package.json.
+
 1. ensure this plugin doesn't bring in a duplicated Aurelia core package to consumers' app. This is mainly for app built with webpack. We had been hit with `aurelia-binding` v1 and v2 conflicts due to 3rd party plugin asks for `aurelia-binding` v1.
 2. reduce the burden for npm/yarn when installing this plugin.
 
@@ -86,6 +115,7 @@ Note all other files in `dev-app/` folder are for the dev app, they would not ap
 By default, the `dist/` folder is not committed to git. (We have `/dist` in `.gitignore`). But that would not prevent you from consuming this plugin through direct git reference.
 
 You can consume this plugin directly by:
+
 ```shell
 npm i github:your_github_username/aurelia-datetimepicker
 # or if you use bitbucket
@@ -97,10 +127,11 @@ npm i https:/github.com/your_github_username/aurelia-datetimepicker.git
 ```
 
 Then load the plugin in app's `main.ts` like this.
+
 ```js
-aurelia.use.plugin('aurelia-datetimepicker');
+aurelia.use.plugin("aurelia-datetimepicker");
 // for webpack user, use PLATFORM.moduleName wrapper
-aurelia.use.plugin(PLATFORM.moduleName('aurelia-datetimepicker'));
+aurelia.use.plugin(PLATFORM.moduleName("aurelia-datetimepicker"));
 ```
 
 The missing `dist/` files will be filled up by npm through `"prepare": "npm run build"` (in `"scripts"` section of package.json).
@@ -112,17 +143,23 @@ Yarn has a [bug](https://github.com/yarnpkg/yarn/issues/5235) that ignores `"pre
 By default, `"private"` field in package.json has been turned on, this prevents you from accidentally publish a private plugin to npm.
 
 To publish the plugin to npm for public assumption:
+
 1. Remove `"private": true,` from package.json.
 
 2. Pump up project version. This will run through `au test` (in "preversion" in package.json) first.
+
 ```shell
 npm version patch # or minor or major
 ```
+
 3. Push up changes to your git server
+
 ```shell
 git push && git push --tags
 ```
+
 4. Then publish to npm, you need to have your npm account logged in.
+
 ```shell
 npm publish
 ```
@@ -132,8 +169,11 @@ npm publish
 You can enable `npm version patch # or minor or major` to automatically update changelog, push commits and version tag to the git server, and publish to npm.
 
 Here is one simple setup.
+
 1. `npm i -D standard-changelog`. We use [`standard-changelog`](https://github.com/conventional-changelog/conventional-changelog) as a minimum example to support conventional changelog.
-  * Alternatively you can use high level [standard-version](https://github.com/conventional-changelog/standard-version).
+
+-   Alternatively you can use high level [standard-version](https://github.com/conventional-changelog/standard-version).
+
 2. Add two commands to `"scripts"` section of package.json.
 
 ```
@@ -143,6 +183,7 @@ Here is one simple setup.
   "postversion": "git push && git push --tags && npm publish"
 },
 ```
+
 3. you can remove `&& npm publish` if your project is private
 
 For more information, go to https://aurelia.io/docs/cli/cli-bundler
@@ -154,8 +195,6 @@ Run `au run`, then open `http://localhost:9000`
 To open browser automatically, do `au run --open`.
 
 To change dev server port, do `au run --port 8888`.
-
-
 
 ## Unit tests
 
