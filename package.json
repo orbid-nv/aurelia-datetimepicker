@@ -44,7 +44,7 @@
         "text": "requirejs/text#latest",
         "through2": "^3.0.0",
         "tslint": "^5.13.0",
-        "typedoc": "^0.14.2",
+        "typedoc": "^0.15.0",
         "typescript": "^3.1.2",
         "vinyl-fs": "^3.0.3"
     },
@@ -66,6 +66,7 @@
         "dist"
     ],
     "dependencies": {
+        "braces": "^3.0.2",
         "flatpickr": "^4.6.2"
     }
 }
