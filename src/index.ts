@@ -17,3 +17,6 @@ export function configure(
 		callback(instance);
 	}
 }
+
+export * from "./datepicker-config";
+export * from "./elements/or-datetimepicker";
