@@ -14,35 +14,23 @@ flatpickr ^4.6.2
 
 ### Configuration
 
-insert this json under dependencies in **aurelia.json**
-
-```json
-({
-    "name": "flatpickr",
-    "path": "../node_modules/flatpickr/dist",
-    "main": "flatpickr"
-},
-{
-    "name": "aurelia-datetimepicker",
-    "path": "../node_modules/@orbid/aurelia-datetimepicker/dist/commonjs",
-    "main": "index"
-})
-```
-
 import DatepickerConfig in **main.ts**
 
 ```typescript
-import { DatepickerConfig } from "@orbid/aurelia-datetimepicker/dist/commonjs/datepicker-config";
+import { DatepickerConfig } from "@orbid/aurelia-datetimepicker";
 ```
 
 insert this code in the configure method in **main.ts**
 
 ```typescript
-aurelia.use.plugin("aurelia-datetimepicker", (config: DatepickerConfig) => {
-    config.dateFormat = "Y-m-d H:i";
-    // all instantiated pickers will use these defaults,
-    // unless they are overruled by a binding
-});
+aurelia.use.plugin(
+    "@orbid/aurelia-datetimepicker",
+    (config: DatepickerConfig) => {
+        config.dateFormat = "Y-m-d H:i";
+        // all instantiated pickers will use these defaults,
+        // unless they are overruled by a binding
+    }
+);
 ```
 
 ### example.html
