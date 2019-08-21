@@ -1,7 +1,7 @@
 {
     "name": "@orbid/aurelia-datetimepicker",
     "description": "An Aurelia plugin project.",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "repository": {
         "type": "git",
         "url": "https://github.com/orbid-nv/aurelia-datetimepicker"
