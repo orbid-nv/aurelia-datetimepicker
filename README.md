@@ -53,7 +53,7 @@ aurelia.use.plugin(
 ### example.ts
 
 ```typescript
-import { OrDatetimepicker } from "@orbid/aurelia-datetimepicker/dist/commonjs/elements/or-datetimepicker";
+import { OrDatetimepicker } from "@orbid/aurelia-datetimepicker";
 export class App {
     public date: Date = new Date();
     public mode: string = "single";
