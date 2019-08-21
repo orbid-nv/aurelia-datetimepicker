@@ -14,12 +14,34 @@ flatpickr ^4.6.2
 
 ### Configuration
 
+insert this json under dependencies in **aurelia.json**
+
+```json
+({
+    "name": "flatpickr",
+    "path": "../node_modules/flatpickr/dist",
+    "main": "flatpickr"
+},
+{
+    "name": "aurelia-datetimepicker",
+    "path": "../node_modules/@orbid/aurelia-datetimepicker/dist/commonjs",
+    "main": "index"
+})
+```
+
+import DatepickerConfig in **main.ts**
+
 ```typescript
-//insert following code in aurelia main.ts
+import { DatepickerConfig } from "@orbid/aurelia-datetimepicker/dist/commonjs/datepicker-config";
+```
+
+insert this code in the configure method in **main.ts**
+
+```typescript
 aurelia.use.plugin("aurelia-datetimepicker", (config: DatepickerConfig) => {
     config.dateFormat = "Y-m-d H:i";
-    //all instantiated pickers will use these defaults,
-    //unless they are overruled by a binding
+    // all instantiated pickers will use these defaults,
+    // unless they are overruled by a binding
 });
 ```
 
@@ -31,13 +53,36 @@ aurelia.use.plugin("aurelia-datetimepicker", (config: DatepickerConfig) => {
     <div>
         <or-datetimepicker
             o-disable.bind="disable"
-            o-on-close.delegate="testOnClose($event.detail)"
-            o-on-open.delegate="testOnClose($event.detail)"
-            o-value.bind="maxDate"
-            view-model.ref="dateTimePickerInstance"
+            o-on-close.delegate="onClose($event.detail)"
+            o-value.bind="date"
+            o-date-format.bind="dateFormat"
+            view-model.ref="flatpickrInstance"
         ></or-datetimepicker>
     </div>
 </template>
+```
+
+### example.ts
+
+```typescript
+import { OrDatetimepicker } from "@orbid/aurelia-datetimepicker/dist/commonjs/elements/or-datetimepicker";
+export class App {
+    public date: Date = new Date();
+    public mode: string = "single";
+    public dateFormat: string = "m-d-Y";
+    public flatpickrInstance: OrDatetimepicker;
+
+    public onClose(detail) {
+        console.log(detail);
+    }
+
+    // Disable every Saturday and Sunday
+    public disable: any[] = [
+        function(date) {
+            return date.getDay() === 0 || date.getDay() === 6;
+        }
+    ];
+}
 ```
 
 ### what makes this project :sparkles: special :sparkles:
@@ -66,7 +111,7 @@ After you added some new file, you need to register it in `src/index.ts`. Like t
 ```js
 config.globalResources([
     // ...
-    PLATFORM.moduleName("./path/to/new-file-without-ext"),
+    PLATFORM.moduleName("./path/to/new-file-without-ext")
 ]);
 ```
 
