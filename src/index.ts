@@ -17,3 +17,5 @@ export function configure(
 		callback(instance);
 	}
 }
+
+export * from "./datepicker-config";
