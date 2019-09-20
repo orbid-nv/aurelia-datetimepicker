@@ -19,3 +19,4 @@ export function configure(
 }
 
 export * from "./datepicker-config";
+export * from "./elements/or-datetimepicker";

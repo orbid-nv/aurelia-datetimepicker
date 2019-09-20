@@ -1,12 +1,12 @@
 {
-    "name": "aurelia-datetimepicker",
+    "name": "@orbid/aurelia-datetimepicker",
     "description": "An Aurelia plugin project.",
-    "version": "0.1.0",
+    "version": "1.0.3",
     "repository": {
-        "type": "???",
-        "url": "???"
+        "type": "git",
+        "url": "https://github.com/orbid-nv/aurelia-datetimepicker"
     },
-    "license": "UNLICENSED",
+    "license": "MIT",
     "devDependencies": {
         "@types/jasmine": "^2.8.9",
         "@types/node": "^10.11.6",
@@ -41,10 +41,10 @@
         "minimatch": "^3.0.4",
         "promise-polyfill": "^8.1.0",
         "requirejs": "^2.3.6",
-        "text": "requirejs/text#latest",
+        "text": "github:requirejs/text#latest",
         "through2": "^3.0.0",
         "tslint": "^5.13.0",
-        "typedoc": "^0.14.2",
+        "typedoc": "^0.15.0",
         "typescript": "^3.1.2",
         "vinyl-fs": "^3.0.3"
     },
@@ -67,5 +67,14 @@
     ],
     "dependencies": {
         "flatpickr": "^4.6.2"
-    }
+    },
+    "directories": {
+        "test": "test"
+    },
+    "keywords": [
+        "datetimepicker",
+        "aurelia",
+        "flatpickr"
+    ],
+    "author": "Orbid NV"
 }
