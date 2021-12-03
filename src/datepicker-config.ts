@@ -26,6 +26,7 @@ public minDate:Date;
 public minTime:Date;
 public minuteIncrement:number;
 public mode:"single"|"multiple"|"range"|"time";
+public monthSelectorType:string;
 public nextArrow:string;
 public noCalendar:boolean;
 public now:Date;
