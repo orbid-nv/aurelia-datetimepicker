@@ -49,9 +49,9 @@ splices: Array<ICollectionObserverSplice<any>>
 	private initialiseProperties(): any{
 	let config = new DatepickerConfig();
 	{{#each properties}}
-	if(this.o{{capitalize name}}){
+	if(this.o{{capitalize name}} != null){
 	config.{{name}} = this.o{{capitalize name}};
-	} else if(this.defaultConfig.{{name}}) {
+	} else if(this.defaultConfig.{{name}} != null) {
 	config.{{name}} = this.defaultConfig.{{name}};
 	}
 	{{/each}}
